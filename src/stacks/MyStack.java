@@ -20,7 +20,6 @@ public class MyStack implements MyStackADT{
         stack = new int[size];
     }
 
-
     @Override
     public void push(int element) throws Exception {
         if (top>=size-1) {
