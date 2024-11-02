@@ -53,4 +53,45 @@ public class AsteroidCollision {
 
         int[] result3 = asteroidCollision(new int[]{10, 2, -5});
     }
+
+    public static class RemoveStars {
+        public static String removeStars(String s) {
+            Stack<Character> stack = new Stack<>();
+            for (int i = 0; i < s.length(); i++) {
+                char ch = s.charAt(i);
+                if (ch != '*') {
+                    stack.push(ch);
+                } else {
+                    if (!stack.isEmpty()) {
+                        stack.pop();
+                    }
+                }
+            }
+    
+            StringBuilder sb = new StringBuilder();
+            while (!stack.isEmpty()) {
+                sb.insert(0,stack.pop());
+            }
+    
+            return sb.toString();
+        }
+        public static void main(String[] args) {
+            String s1 = "leet**cod*e";
+            System.out.println(removeStars(s1)); // Expected output: "lecoe"
+    
+            // Test case 2
+            String s2 = "erase*****";
+            System.out.println(removeStars(s2)); // Expected output: ""
+    
+            // Additional test cases
+            String s3 = "a*b*c*";
+            System.out.println(removeStars(s3)); // Expected output: ""
+    
+            String s4 = "ab**c*d*";
+            System.out.println(removeStars(s4)); // Expected output: ""
+    
+            String s5 = "abc*de*f*";
+            System.out.println(removeStars(s5));
+        }
+    }
 }
