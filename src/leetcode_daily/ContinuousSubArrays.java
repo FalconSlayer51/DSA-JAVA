@@ -1,5 +1,6 @@
 package leetcode_daily;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class ContinuousSubArrays {
@@ -8,7 +9,6 @@ public class ContinuousSubArrays {
         int n = nums.length;
         long subarrays = 0;
         int i = 0,j = 0;
-
 
         while (j <n) {
             map.put(nums[j],map.getOrDefault(nums[j],0)+1);
