@@ -60,7 +60,7 @@ public class MinimumNoOfOperationsToSortBinaryTreeByLevel {
         System.out.println(solution.minimumOperations(root3)); // Output: 0
     }
 
-    private static TreeNode buildTree(Integer[] values) {
+    public static TreeNode buildTree(Integer[] values) {
         if (values.length == 0 || values[0] == null) return null;
         TreeNode root = new TreeNode(values[0]);
         Queue<TreeNode> queue = new LinkedList<>();
