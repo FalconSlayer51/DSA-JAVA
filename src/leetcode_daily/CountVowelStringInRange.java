@@ -1,15 +1,11 @@
 package leetcode_daily;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 
 public class CountVowelStringInRange {
 
     private boolean isVowel(char ch) {
-        HashSet<Character> vowels = new HashSet<>();
-        Collections.addAll(vowels, 'a', 'e', 'i', 'o', 'u');
-        return vowels.contains(ch);
+        return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
     }
 
     public int[] vowelStrings(String[] words, int[][] queries) {
