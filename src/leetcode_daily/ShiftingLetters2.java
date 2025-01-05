@@ -7,37 +7,38 @@ public class ShiftingLetters2 {
         int n = s.length();
         int[] stringArray = new int[n];
 
-        for (int i = 0; i < n; i++) {
-            int strVal = s.charAt(i) - 'a';
-            stringArray[i] = strVal;
-        }
-
         for (int i = 0; i < shifts.length; i++) {
             int start = shifts[i][0];
             int end = shifts[i][1];
             int dir = shifts[i][2];
 
-            for (int j = start; j <= end ; j++) {
-                if (dir == 1) {
-                    stringArray[j] += 1;
-                } else {
-                    stringArray[j] -= 1;
-                    if(stringArray[j] < 0) {
-                        stringArray[j] += 26;
-                    }
-                }
-            }
+            int x;
+            if (dir == 0)
+                x = -1;
+            else
+                x = 1;
+
+            stringArray[start] += x;
+            if (end +1 < n)
+                stringArray[end + 1] -= x;
         }
 
-        System.out.println(Arrays.toString(stringArray));
+
+        // calculate cum sum
+        for (int i = 1; i < n; i++) {
+            stringArray[i] += stringArray[i-1];
+        }
+
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < n; i++) {
-            if (stringArray[i] > 25) {
-                stringArray[i] %= 26;
-            }
 
-            sb.append((char) (stringArray[i] + 'a'));
+        for (int i = 0; i < n; i++) {
+            int shift = stringArray[i] % 26;
+            if (shift < 0) {
+                shift += 26;
+            }
+            char newChar = (char) (((s.charAt(i) - 'a' + shift) % 26) + 'a');
+            sb.append(newChar);
         }
 
         return sb.toString();
