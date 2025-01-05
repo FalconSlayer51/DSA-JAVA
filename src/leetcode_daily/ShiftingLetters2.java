@@ -22,6 +22,9 @@ public class ShiftingLetters2 {
                     stringArray[j] += 1;
                 } else {
                     stringArray[j] -= 1;
+                    if(stringArray[j] < 0) {
+                        stringArray[j] += 26;
+                    }
                 }
             }
         }
