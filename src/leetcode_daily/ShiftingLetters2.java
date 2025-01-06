@@ -1,7 +1,5 @@
 package leetcode_daily;
 
-import java.util.Arrays;
-
 public class ShiftingLetters2 {
     public String shiftingLetters(String s, int[][] shifts) {
         int n = s.length();
