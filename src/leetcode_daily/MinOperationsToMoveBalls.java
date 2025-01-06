@@ -7,29 +7,26 @@ public class MinOperationsToMoveBalls {
         int n = boxes.length();
         int[] result = new int[n];
 
-        int[] prefix = new int[n];
+        int balls = 0, moves = 0;
         for (int i = 0; i < n; i++) {
-            for (int j = i+1; j < n; j++) {
-                char ch = boxes.charAt(j);
-                if (ch == '1') {
-                    prefix[i] += Math.abs(j-i);
-                }
+            result[i] = balls + moves;
+            moves = moves + balls;
+            if (boxes.charAt(i) == '1') {
+                balls += 1;
             }
         }
 
-        int[] suffix = new int[n];
+        balls = 0;
+        moves = 0;
+
         for (int i = n-1; i >= 0 ; i--) {
-            for (int j = i-1; j >= 0 ; j--) {
-                char ch = boxes.charAt(j);
-                if (ch=='1') {
-                    suffix[i] += Math.abs(j-i);
-                }
+            result[i] += balls + moves;
+            moves = moves + balls;
+            if (boxes.charAt(i) == '1') {
+                balls += 1;
             }
         }
 
-        for (int i = 0; i < n; i++) {
-            result[i] = prefix[i] + suffix[i];
-        }
 
         return result;
     }
