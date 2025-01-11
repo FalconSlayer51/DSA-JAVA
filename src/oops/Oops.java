@@ -53,24 +53,24 @@ public class Oops {
     public static void main(String[] args) {
         // `Car obj;` no memory location here
         Car obj = new Car(); // memory allocated in heap
-        System.out.println("speed: "+obj.speed);
+        System.out.println("speed: " + obj.speed);
 
         // Parameterized constructor
-        Car obj2 = new Car("ford","red",true,100,"ecosport");
-        System.out.println("speed: "+obj2.speed);
+        Car obj2 = new Car("ford", "red", true, 100, "ecosport");
+        System.out.println("speed: " + obj2.speed);
 
         // Copy constructor
         Car obj3 = new Car(obj2);
-        System.out.println("speed: "+obj3.speed);
+        System.out.println("speed: " + obj3.speed);
 
         obj2.speed = 90;
-        System.out.println("speed: "+obj2.speed);
-        System.out.println("speed: "+obj3.speed);
+        System.out.println("speed: " + obj2.speed);
+        System.out.println("speed: " + obj3.speed);
 
         // Same Reference
         Car obj4 = obj2;
-        System.out.println("speed: "+obj4.speed);
+        System.out.println("speed: " + obj4.speed);
         obj2.speed = 50;
-        System.out.println("speed: "+obj4.speed);
+        System.out.println("speed: " + obj4.speed);
     }
 }
