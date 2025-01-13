@@ -5,21 +5,20 @@ import java.util.HashMap;
 public class MinimumLengthOfStringAfterRemoval {
     public int minimumLength(String s) {
         int n = s.length();
-        HashMap<Character, Integer> charToFreq = new HashMap<>();
-        for (char ch : s.toCharArray()) {
-            charToFreq.put(ch,charToFreq.getOrDefault(ch,0)+1);
+        int[] freq = new int[26];
+
+        for(char ch : s.toCharArray()) {
+            freq[ch - 'a'] ++;
         }
 
-        System.out.println(charToFreq);
         int len = 0;
-        for (char ch : charToFreq.keySet()) {
-            int freq = charToFreq.get(ch);
-            if ( freq >= 3) {
-                int lenToSub = freq % 2 != 0 ? 1 : 2;
-                len += freq - lenToSub;
+        for(int i = 0; i < 26; i++) {
+            int count = freq[i];
+            if (count >= 3) {
+                int lenToSub = count % 2 != 0 ? 1 : 2;
+                len += count - lenToSub;
             }
         }
-
         return n - len;
     }
 
