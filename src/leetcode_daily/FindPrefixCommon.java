@@ -1,27 +1,22 @@
 package leetcode_daily;
 
 import java.util.Arrays;
-import java.util.HashSet;
 
 public class FindPrefixCommon {
     public int[] findThePrefixCommonArray(int[] A, int[] B) {
         int n = A.length;
         int[] result = new int[n];
+        int[] freqArray = new int[n+1];
+        int commonCount = 0;
 
         for (int i = 0; i < n; i++) {
-            int[] subarrayA = Arrays.copyOfRange(A, 0, i + 1);
-            int[] subarrayB = Arrays.copyOfRange(B, 0, i + 1);
-            HashSet<Integer> set = new HashSet<>();
-            for (int num: subarrayA) {
-                set.add(num);
-            }
+            freqArray[A[i]] += 1;
+            if (freqArray[A[i]] == 2) commonCount ++;
 
-            int count = 0;
-            for(int num : subarrayB) {
-                if (set.contains(num)) count++;
-            }
+            freqArray[B[i]] += 1;
+            if (freqArray[B[i]] == 2) commonCount ++;
 
-            result[i] = count;
+            result[i] = commonCount;
         }
 
         return result;
