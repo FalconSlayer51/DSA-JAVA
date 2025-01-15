@@ -2,6 +2,7 @@ package leetcode_daily;
 
 public class CountWaysToBuildStrings {
     public int countGoodStrings(int low, int high, int zero, int one) {
+        // This is a dp solution
         int maxLen = high + Math.max(zero, one);
         int[] dp = new int[maxLen + 1];
         for (int len = high; len >= 0; len--) {
