@@ -1,6 +1,7 @@
 package leetcode_daily;
 
 public class MinimizeXOR {
+    // Leetcode day-93
     public int minimizeXor(int num1, int num2) {
         int x = num1;
         int currentBitCount = Integer.bitCount(x);
