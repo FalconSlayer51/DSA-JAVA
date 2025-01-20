@@ -19,7 +19,7 @@ public class FirstCompletelyPaintedColOrRow {
             if (map.containsKey(arr[i])) {
                 Integer[] point = map.get(arr[i]);
                 result[point[0]][point[1]] = true;
-                if (isAnyRowOrColFilled(result)) {
+                if (isRowPainted(result,point[0]) || isColPainted(result,point[1])) {
                     return i;
                 }
             }
@@ -28,38 +28,24 @@ public class FirstCompletelyPaintedColOrRow {
         return -1;
     }
 
-    public static boolean isAnyRowOrColFilled(boolean[][] array) {
-        int rows = array.length;
-        int cols = array[0].length;
-
-        // Check each row
-        for (boolean[] row : array) {
-            if (isAllTrue(row)) return true; // Return true if a row is fully filled
+    private boolean isColPainted(boolean[][] result, int colIndex) {
+        int m = result.length;
+        for (int i = 0; i < m; i++) {
+            if (!result[i][colIndex]) return false;
         }
-
-        // Check each column
-        for (int col = 0; col < cols; col++) {
-            if (isColumnAllTrue(array, col, rows)) return true; // Return true if a column is fully filled
-        }
-
-        return false; // No row or column is fully filled
+        return true;
     }
 
-    // Check if all elements in a row are true
-    private static boolean isAllTrue(boolean[] row) {
-        for (boolean val : row) {
-            if (!val) return false; // If any value is false, the row is not filled
+    private boolean isRowPainted(boolean[][] result, int rowIndex) {
+        boolean[] row = result[rowIndex];
+        for (boolean value: row) {
+            if (!value) return false;
         }
-        return true; // All values are true
+        return true;
     }
 
     // Check if all elements in a column are true
-    private static boolean isColumnAllTrue(boolean[][] array, int col, int rows) {
-        for (int row = 0; row < rows; row++) {
-            if (!array[row][col]) return false; // If any value is false, the column is not filled
-        }
-        return true; // All values are true
-    }
+
 
     public static void main(String[] args) {
         FirstCompletelyPaintedColOrRow solver = new FirstCompletelyPaintedColOrRow();
