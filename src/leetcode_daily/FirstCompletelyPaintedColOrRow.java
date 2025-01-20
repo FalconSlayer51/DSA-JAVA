@@ -6,7 +6,7 @@ public class FirstCompletelyPaintedColOrRow {
     public int firstCompleteIndex(int[] arr, int[][] mat) {
         int m = mat.length;
         int n = mat[0].length;
-        boolean[][] result = new boolean[m][n];
+        //boolean[][] result = new boolean[m][n];
         HashMap<Integer, Integer[]> map = new HashMap<>();
 
         for (int i = 0; i < m; i++) {
@@ -15,13 +15,19 @@ public class FirstCompletelyPaintedColOrRow {
             }
         }
 
-        for (int i = 0; i < arr.length; i++) {
-            if (map.containsKey(arr[i])) {
-                Integer[] point = map.get(arr[i]);
-                result[point[0]][point[1]] = true;
-                if (isRowPainted(result,point[0]) || isColPainted(result,point[1])) {
-                    return i;
-                }
+        int[] countRow = new int[m];
+        int[] countCol = new int[n];
+
+        for (int i = 0;i < arr.length;i++) {
+            Integer[] point = map.get(arr[i]);
+            int row = point[0];
+            int col = point[1];
+
+            countRow[row]++;
+            countCol[col]++;
+
+            if (countRow[row] == n || countCol[col] == m) {
+                return i;
             }
         }
 
