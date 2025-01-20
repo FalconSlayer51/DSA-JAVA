@@ -1,12 +1,14 @@
 package leetcode_daily;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 public class FirstCompletelyPaintedColOrRow {
     public int firstCompleteIndex(int[] arr, int[][] mat) {
         int m = mat.length;
         int n = mat[0].length;
-        //boolean[][] result = new boolean[m][n];
         HashMap<Integer, Integer[]> map = new HashMap<>();
 
         for (int i = 0; i < m; i++) {
@@ -15,23 +17,35 @@ public class FirstCompletelyPaintedColOrRow {
             }
         }
 
-        int[] countRow = new int[m];
-        int[] countCol = new int[n];
+        HashMap<Integer, List<Integer>> rowMap = new HashMap<>();
+        HashMap<Integer, List<Integer>> colMap = new HashMap<>();
 
-        for (int i = 0;i < arr.length;i++) {
+        for (int i = 0; i < arr.length; i++) {
             Integer[] point = map.get(arr[i]);
             int row = point[0];
             int col = point[1];
 
-            countRow[row]++;
-            countCol[col]++;
+            rowMap.putIfAbsent(row, new ArrayList<>());
+            rowMap.get(row).add(i);
 
-            if (countRow[row] == n || countCol[col] == m) {
-                return i;
-            }
+            // Add to colMap
+            colMap.putIfAbsent(col, new ArrayList<>());
+            colMap.get(col).add(i);
         }
 
-        return -1;
+        int result = arr.length;
+        for (int ele: rowMap.keySet()) {
+            int max = rowMap.get(ele).stream().max(Comparator.naturalOrder()).orElseThrow();
+            result = Math.min(result,max);
+        }
+
+
+        for (int ele: colMap.keySet()) {
+            int max = colMap.get(ele).stream().max(Comparator.naturalOrder()).orElseThrow();
+            result = Math.min(result,max);
+        }
+
+        return result;
     }
 
     private boolean isColPainted(boolean[][] result, int colIndex) {
