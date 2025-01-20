@@ -1,18 +1,26 @@
 package leetcode_daily;
 
+import java.util.HashMap;
+
 public class FirstCompletelyPaintedColOrRow {
     public int firstCompleteIndex(int[] arr, int[][] mat) {
         int m = mat.length;
         int n = mat[0].length;
         boolean[][] result = new boolean[m][n];
+        HashMap<Integer, Integer[]> map = new HashMap<>();
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                map.put(mat[i][j], new Integer[]{i, j});
+            }
+        }
 
         for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < m; j++) {
-                for (int k = 0; k < n; k++) {
-                    if (mat[j][k] == arr[i]) {
-                        result[j][k] = true;
-                        if (isAnyRowOrColFilled(result)) return i;
-                    }
+            if (map.containsKey(arr[i])) {
+                Integer[] point = map.get(arr[i]);
+                result[point[0]][point[1]] = true;
+                if (isAnyRowOrColFilled(result)) {
+                    return i;
                 }
             }
         }
