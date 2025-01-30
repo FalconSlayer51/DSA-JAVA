@@ -34,4 +34,8 @@ public class SplitaSubStringIntMaxUniqueStrings {
         System.out.println(sol.maxUniqueSplit("aba")); // Expected output: 2
         System.out.println(sol.maxUniqueSplit("aa")); // Expected output: 1
     }
+
+    public static class MagnificentSets {
+
+    }
 }
